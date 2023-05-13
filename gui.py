@@ -48,18 +48,21 @@ class GUI:
         self.button5.pack(pady=10)
         self.button6.pack(pady=10)
 
-        stop_and_quit_frame = Frame(self.window)
-        stop_and_quit_frame.pack(pady=20)
+        stop_frame = Frame(self.window)
+        stop_frame.pack(pady=20)
 
-        self.stop_button = Button(stop_and_quit_frame, text="Stop Sounds", command=lambda: self.stop_sounds())
+        self.stop_button = Button(stop_frame, text="Stop Sounds", command=lambda: self.stop_sounds())
         self.stop_button.pack()
-        self.quit_button = Button(stop_and_quit_frame, text="Quit", command=lambda: self.window.destroy())
+
+        quit_frame = Frame(self.window)
+        quit_frame.pack(pady=20)
+        self.quit_button = Button(quit_frame, text="Quit", command=lambda: self.window.destroy())
         self.quit_button.pack()
 
     def play_sound(self, sound_name):
         self.stop_sounds()
 
-        volume = self.volume_slider.get()
+        volume = self.volume_slider.get() / 100
         self.sound_player.play_sound(sound_name, volume)
 
     def stop_sounds(self):
