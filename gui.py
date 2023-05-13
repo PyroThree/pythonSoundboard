@@ -5,6 +5,7 @@ import soundboard
 class GUI:
     def __init__(self, window):
         self.window = window
+        self.sound_player = soundboard.SoundBoard()
 
         title_label = Label(self.window, text="Sound Board", font=("Arial", 20))
         title_label.pack(pady=10)
@@ -28,9 +29,9 @@ class GUI:
         sound_column1 = Frame(sound_frame)
         sound_column1.pack(side=LEFT, padx=10)
 
-        self.button1 = Button(sound_column1, text="Sound 1")
-        self.button2 = Button(sound_column1, text="Sound 3")
-        self.button3 = Button(sound_column1, text="Sound 5")
+        self.button1 = Button(sound_column1, text="Sound 1", command=lambda: self.play_sound('Sound 1'))
+        self.button2 = Button(sound_column1, text="Sound 3", command=lambda: self.play_sound('Sound 3'))
+        self.button3 = Button(sound_column1, text="Sound 5", command=lambda: self.play_sound('Sound 5'))
 
         self.button1.pack(pady=10)
         self.button2.pack(pady=10)
@@ -39,9 +40,9 @@ class GUI:
         sound_column2 = Frame(sound_frame)
         sound_column2.pack(side=LEFT, padx=10)
 
-        self.button4 = Button(sound_column2, text="Sound 2")
-        self.button5 = Button(sound_column2, text="Sound 4")
-        self.button6 = Button(sound_column2, text="Sound 6")
+        self.button4 = Button(sound_column2, text="Sound 2", command=lambda: self.play_sound('Sound 2'))
+        self.button5 = Button(sound_column2, text="Sound 4", command=lambda: self.play_sound('Sound 4'))
+        self.button6 = Button(sound_column2, text="Sound 6", command=lambda: self.play_sound('Sound 6'))
 
         self.button4.pack(pady=10)
         self.button5.pack(pady=10)
@@ -50,10 +51,18 @@ class GUI:
         stop_and_quit_frame = Frame(self.window)
         stop_and_quit_frame.pack(pady=20)
 
-        self.stop_button = Button(stop_and_quit_frame, text="Stop Sounds")
+        self.stop_button = Button(stop_and_quit_frame, text="Stop Sounds", command=lambda: self.stop_sounds())
         self.stop_button.pack()
-        self.quit_button = Button(stop_and_quit_frame, text="Quit")
+        self.quit_button = Button(stop_and_quit_frame, text="Quit", command=lambda: self.window.destroy())
         self.quit_button.pack()
 
+    def play_sound(self, sound_name):
+        self.stop_sounds()
+
+        volume = self.volume_slider.get()
+        self.sound_player.play_sound(sound_name, volume)
+
+    def stop_sounds(self):
+        self.sound_player.stop_sounds()
 
 
