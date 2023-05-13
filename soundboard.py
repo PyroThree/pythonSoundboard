@@ -2,7 +2,13 @@ import pygame.mixer
 
 
 class SoundBoard:
+    """
+    Class for sound file objects
+    """
     def __init__(self):
+        """
+        Ties strings to sound files
+        """
         pygame.mixer.init()
         self.sounds = {
             "Sound 1": pygame.mixer.Sound("sound1.wav"),
@@ -14,7 +20,13 @@ class SoundBoard:
         }
         self.current_sound = None
 
-    def play_sound(self, sound_name, volume):
+    def play_sound(self, sound_name: str, volume: int):
+        """
+        Method that plays sound based on button clicked (name of button)
+        :param sound_name: name of button that was clicked
+        :param volume: integer value divided by 100 essentially for % volume to play sound at
+        :return: sound
+        """
         if self.current_sound:
             self.current_sound.stop()
         self.current_sound = self.sounds[sound_name]
@@ -22,6 +34,9 @@ class SoundBoard:
         self.current_sound.play()
 
     def stop_sounds(self):
+        """
+        Method to stop any currently playing sounds
+        """
         if self.current_sound:
             self.current_sound.stop()
         self.current_sound = None

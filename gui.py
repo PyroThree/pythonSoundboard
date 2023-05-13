@@ -59,13 +59,21 @@ class GUI:
         self.quit_button = Button(quit_frame, text="Quit", command=lambda: self.window.destroy())
         self.quit_button.pack()
 
-    def play_sound(self, sound_name):
+    def play_sound(self, sound_name: str):
+        """
+        Method to call play_sound from soundboard.py for playing sound based on button clicked
+        :param sound_name: sound file to be played
+        :return: sound file to be played and volume % to be played at
+        """
         self.stop_sounds()
 
         volume = self.volume_slider.get() / 100
         self.sound_player.play_sound(sound_name, volume)
 
     def stop_sounds(self):
+        """
+        Method to call stop_sounds from soundboard.py which stops all currently playing sounds
+        """
         self.sound_player.stop_sounds()
 
 
